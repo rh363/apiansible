@@ -1,0 +1,23 @@
+---
+- name: add nfs server access
+  hosts: "{{ target }}"
+  remote_user: ansible-user
+  become: true
+  tasks:
+   
+    - name: add exports configuration lines
+      lineinfile:
+        path: /etc/exports
+        line: /exports {{ item }}(rw,fsid=0,insecure,root_squash,sync)
+      loop: "{{ dests }}"
+
+    - name: restart rpcbind and nfs-server
+      service:
+        name: "{{ item }}" 
+        enabled: yes
+        state: restarted
+      loop:
+        - rpcbind
+        - nfs-server
+
+    

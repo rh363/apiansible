@@ -1,0 +1,53 @@
+---
+- name: install nfs server
+  hosts: "{{ target }}"
+  remote_user: ansible-user
+  become: true
+  tasks:
+    - name: upgrade all packages
+      yum: update_cache=yes name=* state=latest 
+
+    - name: install nfs-utils
+      yum: name=nfs-utils state=latest
+
+    - name: Create a mountable directory if it does not exist
+      file:
+        path: /exports
+        state: directory
+        owner: root
+        group: root
+        mode: '0775'
+    
+    - name: Umount k3s volume if already exists
+      mount:
+        path: /exports
+        state: unmounted
+    
+    - name: Mount k3s volume
+      mount:
+        src: "{{ src }}:/exports"
+        path: /exports
+        opts: "rw,sync,hard,intr"
+        boot: false
+        state: mounted
+        fstype: nfs
+        
+    - name: create exports configuration file if not exist
+      copy:
+        content: ""
+        dest: /etc/exports
+        owner: root
+        group: root
+        mode: 0644
+        force: true
+        
+    - name: restart rpcbind and nfs-server
+      service:
+        name: "{{ item }}" 
+        enabled: yes
+        state: restarted
+      loop:
+        - rpcbind
+        - nfs-server
+
+    

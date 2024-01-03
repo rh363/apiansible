@@ -1,0 +1,39 @@
+---
+- name: uninstall nfs server
+  hosts: "{{ target }}"
+  remote_user: ansible-user
+  become: true
+  tasks:
+
+    - name: stop rpcbind and nfs-server
+      service:
+        name: "{{ item }}" 
+        enabled: false
+        state: stopped
+      loop:
+        - rpcbind
+        - nfs-server
+
+    - name: remove nfs-utils
+      yum: 
+        name: nfs-utils 
+        state: absent
+
+    - name: Umount k3s volume if already exists
+      mount:
+        path: /exports
+        state: unmounted
+  
+    - name: Remove mountable directory if it exists
+      file:
+        path: /exports
+        state: absent
+        
+    - name: create exports configuration file if not exist
+      file:
+        path: /etc/exports
+        state: absent
+        
+    
+
+    
