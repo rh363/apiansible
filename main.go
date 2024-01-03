@@ -39,7 +39,7 @@ var inventory_backup_file string = "backup"
 var hosts_backup_file string = "hosts.backup"
 
 var hosts_path string = "/etc/" + hosts_file
-var inventory_path string = "/root/" + inventory_file
+var inventory_path string = "/etc/ansible/" + inventory_file
 var inventory_backup_path = "/etc/ansible/" + inventory_backup_file
 var hosts_backup_path = "/etc/" + hosts_backup_file
 
@@ -511,5 +511,5 @@ func main() {
 	router.DELETE("/apiansible/inventory/server/:namespace/:ip/nfs/", delete_server_nfs)
 	router.DELETE("/apiansible/inventory/server/:namespace/:ip", delete_server)
 
-	router.Run("0.0.0.0:6666")
+	router.Run("0.0.0.0:4444")
 }
