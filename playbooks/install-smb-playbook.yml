@@ -1,0 +1,58 @@
+---
+- name: install server
+  hosts: local
+  become: true
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: upgrade all packages
+      yum: update_cache=yes name=* state=latest
+
+    - name:
+      yum: name={{ item }} state=latest
+      loop:
+        - samba 
+        - samba-common 
+        - samba-client
+    
+    - name: Create a mountable directory if it does not exist
+      file:
+        path: /sharing
+        state: directory
+        owner: root
+        group: root
+        mode: '0775'
+
+    - name: Mount k3s volume
+      mount:
+        src: "{{ src }}:/exports"
+        path: /sharing
+        opts: "rw,sync,hard,intr"
+        boot: false
+        state: mounted
+        fstype: nfs
+
+    - name: Creating a file with content
+      copy:
+        dest: "/etc/samba/smb.conf"
+        content: |
+        [global]
+	        workgroup = {{ workgroup }}
+          server string = Samba Server 
+          security = user
+          dns proxy = no
+	        log file = /var/log/samba/log.%m
+          max log size = 1000
+          logging = file
+          panic action = /usr/share/samba/panic-action %d
+	        map to guest = bad user
+
+        [sharing]
+	        valid users = @smb_group
+	        path = /sharing
+          browsable = yes
+          writable = yes
+          guest ok = no
+          read only = no"
+    
