@@ -36,3 +36,13 @@
         path: /sharing
         state: unmounted
         
+    - name: Remove mountable directory if it exists
+      file:
+        path: /sharing
+        state: absent
+        
+    - name: Remove samba config directory
+      file:
+        path: /etc/samba
+        state: absent
+        
