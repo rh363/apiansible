@@ -135,14 +135,14 @@ func install_nfs_server(src string) error {
 	return nil
 }
 
-func install_smb_server(src string, workspace string) error {
+func install_smb_server(src string, workgroup string) error {
 
 	ansiblePlaybookConnectionOptions := &ansible.AnsiblePlaybookConnectionOptions{}
 
 	ansiblePlaybookOptions := &ansible.AnsiblePlaybookOptions{
 		ExtraVars: map[string]interface{}{
 			"src":       src,
-			"workspace": workspace,
+			"workgroup": workgroup,
 		},
 	}
 
@@ -201,7 +201,7 @@ type post_server_nfs_request struct {
 
 type post_server_smb_request struct {
 	Src       string     `json:"src"`
-	Workspace string     `json:"workspace"`
+	Workgroup string     `json:"workgroup"`
 	Users     []smb_user `json:"users"`
 }
 
@@ -249,7 +249,7 @@ func api_install_server_smb(context *gin.Context) {
 		context.IndentedJSON(http.StatusBadRequest, ERR_bad_json_format)
 		return
 	}
-	if err := install_smb_server(post_request.Src, post_request.Workspace); err != nil {
+	if err := install_smb_server(post_request.Src, post_request.Workgroup); err != nil {
 		context.IndentedJSON(http.StatusBadRequest, Response{Message: err.Error()})
 		return
 	}
