@@ -2,6 +2,8 @@
 - name: install nfs server
   hosts: local
   become: true
+  connection: local
+  gather_facts: false
 
   tasks:
     - name: upgrade all packages

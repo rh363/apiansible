@@ -2,6 +2,8 @@
 - name: add nfs server access
   hosts: local
   become: true
+  connection: local
+  gather_facts: false
   
   tasks:
    
