@@ -1,5 +1,5 @@
 ---
-- name: install server
+- name: install smb server
   hosts: local
   become: true
   connection: local
