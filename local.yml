@@ -2,12 +2,46 @@
 - name: install server
   hosts: local
   become: true
+  connection: local
+  gather_facts: false
 
   tasks:
     - name: upgrade all packages
-      yum: update_cache=yes name=* state=latest 
+      yum: update_cache=yes name=* state=latest
 
+    - name: disable selinux [1/2]
+      selinux:
+        state: permissive
+    - name: disable selinux [2/2]
+      shell: "setenforce 0"
+
+    - name: disable firewalld
+      service:
+        name: firewalld
+        state: stopped
+        enabled: false
+        
     - name: get playbooks
-      copy
+      copy: 
+        src: playbooks
+        dest: /etc/ansible/playbooks
+
+    - name: Grab gogs latest binaries 
+      get_url: 
+        url: "https://github.com/rh363/apiansible/releases/download/v1.0/apiansible"
+        dest: /usr/local/bin/
+        mode: 0777
+    
+    - name: get service
+      copy: 
+        src: apiansible.service
+        dest: /etc/systemd/system/apiansible.service
+    
+    - name: start service
+      service:
+        name: apiansible
+        state: started
+        enabled: true
+
 
     
