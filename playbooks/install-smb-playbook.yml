@@ -38,25 +38,34 @@
         name: smb_group
         state: present
 
-    - name: Creating a file with content
+    - name: Creating smb configuration file
       copy:
         dest: "/etc/samba/smb.conf"
         content: |
-        [global]
-	workgroup = {{ workgroup }}
-        server string = Samba Server 
-        security = user
-        dns proxy = no
-	log file = /var/log/samba/log.%m
-        max log size = 1000
-        logging = file
-        panic action = /usr/share/samba/panic-action %d
-	map to guest = bad user
-        [sharing]
-	valid users = @smb_group
-	path = /sharing
-        browsable = yes
-        writable = yes
-        guest ok = no
-        read only = no"
+          [global]
+          workgroup = {{ workgroup }}
+          server string = Samba Server 
+          security = user
+          dns proxy = no
+          log file = /var/log/samba/log.%m
+          max log size = 1000
+          logging = file
+          panic action = /usr/share/samba/panic-action %d
+          map to guest = bad user
+          [sharing]
+          valid users = @smb_group
+          path = /sharing
+          browsable = yes
+          writable = yes
+          guest ok = no
+          read only = no
+    
+    - name: restart smb and nmb
+      service:
+        name: "{{ item }}" 
+        enabled: yes
+        state: restarted
+      loop:
+        - smb
+        - nmb
     
