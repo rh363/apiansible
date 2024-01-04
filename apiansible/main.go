@@ -1,5 +1,11 @@
 package main
-
+/*
+NAME=APIANISBLE
+AUTHOR=RH363
+DATE=01/2024
+COMPANY=SEEWEB
+VERSION=1.0
+*/
 import (
 	"errors"
 	"net/http"
