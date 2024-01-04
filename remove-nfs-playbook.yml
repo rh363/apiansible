@@ -3,6 +3,8 @@
   hosts: "{{ target }}"
   remote_user: ansible-user
   become: true
+  gather_facts: false
+  
   tasks:
    
     - name: remove exports configuration lines

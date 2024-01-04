@@ -3,7 +3,13 @@
   hosts: "{{ target }}"
   remote_user: ansible-user
   become: true
+  gather_facts: false
+
   tasks:
+    - name: Write the new instance host key to known hosts
+      connection: local
+      shell: "ssh-keyscan -H {{ inventory_hostname }} >> ~/.ssh/known_hosts"
+
     - name: upgrade all packages
       yum: update_cache=yes name=* state=latest 
 
