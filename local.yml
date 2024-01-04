@@ -25,7 +25,7 @@
     - name: get playbooks
       copy: 
         src: playbooks
-        dest: /etc/ansible/playbooks
+        dest: /etc/ansible/
 
     - name: get api binary binaries 
       get_url: 
