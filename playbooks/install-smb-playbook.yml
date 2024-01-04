@@ -15,7 +15,7 @@
         - samba 
         - samba-common 
         - samba-client
-        - nfs-util
+        - nfs-utils
     
     - name: Create a mountable directory if it does not exist
       file:
