@@ -41,7 +41,7 @@
     - name: start service
       service:
         name: apiansible
-        state: started
+        state: restarted
         enabled: true
 
 
