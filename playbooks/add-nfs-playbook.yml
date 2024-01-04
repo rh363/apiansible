@@ -1,9 +1,7 @@
 ---
 - name: add nfs server access
-  hosts: "{{ target }}"
-  remote_user: ansible-user
+  hosts: local
   become: true
-  gather_facts: false
   
   tasks:
    
