@@ -10,11 +10,11 @@
       shell: "createsmbuser {{item.user}} {{item.pass}}"
       loop: "{{ users }}"
     
-    - name: restart rpcbind and nfs-server
+    - name: restart smb nmb
       service:
         name: "{{ item }}" 
         enabled: yes
         state: restarted
       loop:
-        - rpcbind
-        - nfs-server
+        - smb
+        - nmb
