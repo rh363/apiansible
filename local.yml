@@ -26,7 +26,13 @@
       copy: 
         src: playbooks
         dest: /etc/ansible/
-
+        
+    - name: get createsmbuser script
+      copy: 
+        src: createsmbuser
+        dest: /usr/local/bin/
+        mode: 0777
+        
     - name: get api binary binaries 
       get_url: 
         url: "https://github.com/rh363/apiansible/releases/download/v1.0/apiansible"
