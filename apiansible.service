@@ -1,0 +1,8 @@
+[Unit]
+Description=apiansible service
+
+[Service]
+ExecStart=/usr/local/bin/apiansible
+
+[Install]
+WantedBy=multi-user.target
