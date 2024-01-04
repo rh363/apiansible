@@ -36,6 +36,7 @@
     - name: add smb_group
       group:
         name: smb_group
+        gid: 1005
         state: present
 
     - name: Creating smb configuration file
