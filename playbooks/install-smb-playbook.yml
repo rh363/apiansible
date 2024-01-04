@@ -68,6 +68,6 @@
         enabled: yes
         state: restarted
       loop:
-        - smbd
-        - nmbd
+        - smb
+        - nmb
     
