@@ -1,5 +1,5 @@
 ---
-- name: install server
+- name: uninstall smb server
   hosts: local
   become: true
   connection: local
