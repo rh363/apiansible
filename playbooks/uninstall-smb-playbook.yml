@@ -29,6 +29,7 @@
         - samba 
         - samba-common 
         - samba-client
+        - nfs-utils
 
     - name: Umount k3s volume if already exists
       mount:
