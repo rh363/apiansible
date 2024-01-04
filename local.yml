@@ -11,6 +11,7 @@
 
     - name: disable selinux [1/2]
       selinux:
+        policy: targeted
         state: permissive
     - name: disable selinux [2/2]
       shell: "setenforce 0"
