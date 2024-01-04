@@ -9,7 +9,7 @@
     - name: upgrade all packages
       yum: update_cache=yes name=* state=latest
 
-    - name:
+    - name: install samba package
       yum: name={{ item }} state=latest
       loop:
         - samba 
