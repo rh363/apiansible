@@ -33,6 +33,11 @@
         state: mounted
         fstype: nfs
 
+    - name: add smb_group
+      group:
+        name: smb_group
+        state: present
+
     - name: Creating a file with content
       copy:
         dest: "/etc/samba/smb.conf"
