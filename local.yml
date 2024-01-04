@@ -1,0 +1,13 @@
+---
+- name: install server
+  hosts: local
+  become: true
+
+  tasks:
+    - name: upgrade all packages
+      yum: update_cache=yes name=* state=latest 
+
+    - name: get playbooks
+      copy
+
+    
