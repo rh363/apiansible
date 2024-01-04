@@ -29,7 +29,7 @@
         path: /exports
         state: absent
         
-    - name: create exports configuration file if not exist
+    - name: Remove exports configuration file if exist
       file:
         path: /etc/exports
         state: absent
