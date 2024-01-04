@@ -228,7 +228,7 @@ type Response struct {
 
 func api_install_server_nfs(context *gin.Context) {
 	var post_request post_server_nfs_request
-	if err := context.BindJSON(post_request); err != nil {
+	if err := context.BindJSON(&post_request); err != nil {
 		context.IndentedJSON(http.StatusBadRequest, ERR_bad_json_format)
 		return
 	}
@@ -245,7 +245,7 @@ func api_install_server_nfs(context *gin.Context) {
 
 func api_install_server_smb(context *gin.Context) {
 	var post_request post_server_smb_request
-	if err := context.BindJSON(post_request); err != nil {
+	if err := context.BindJSON(&post_request); err != nil {
 		context.IndentedJSON(http.StatusBadRequest, ERR_bad_json_format)
 		return
 	}
@@ -262,7 +262,7 @@ func api_install_server_smb(context *gin.Context) {
 
 func api_post_server_nfs_access(context *gin.Context) {
 	var post_request server_nfs_access_request
-	if err := context.BindJSON(post_request); err != nil {
+	if err := context.BindJSON(&post_request); err != nil {
 		context.IndentedJSON(http.StatusBadRequest, ERR_bad_json_format)
 		return
 	}
@@ -276,7 +276,7 @@ func api_post_server_nfs_access(context *gin.Context) {
 
 func api_post_server_smb_access(context *gin.Context) {
 	var post_request server_smb_add_access_request
-	if err := context.BindJSON(post_request); err != nil {
+	if err := context.BindJSON(&post_request); err != nil {
 		context.IndentedJSON(http.StatusBadRequest, ERR_bad_json_format)
 		return
 	}
@@ -290,7 +290,7 @@ func api_post_server_smb_access(context *gin.Context) {
 
 func api_patch_server_nfs_access(context *gin.Context) {
 	var post_request server_nfs_access_request
-	if err := context.BindJSON(post_request); err != nil {
+	if err := context.BindJSON(&post_request); err != nil {
 		context.IndentedJSON(http.StatusBadRequest, ERR_bad_json_format)
 		return
 	}
@@ -304,7 +304,7 @@ func api_patch_server_nfs_access(context *gin.Context) {
 
 func api_patch_server_smb_access(context *gin.Context) {
 	var post_request server_smb_remove_access_request
-	if err := context.BindJSON(post_request); err != nil {
+	if err := context.BindJSON(&post_request); err != nil {
 		context.IndentedJSON(http.StatusBadRequest, ERR_bad_json_format)
 		return
 	}
