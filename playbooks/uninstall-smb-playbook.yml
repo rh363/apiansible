@@ -1,0 +1,37 @@
+---
+- name: install server
+  hosts: local
+  become: true
+  connection: local
+  gather_facts: false
+
+  tasks:
+
+    - name: get user
+      shell: "getent passwd | awk -F: '$4 == 1005 {print $1}'"
+      register: users
+
+    - name: remove all users
+      user:
+        name: "{{ item }}"
+        state: absent
+        remove: yes
+      loop: "{{ users.stdout_lines }}"
+    
+    - name: remove group
+      group: 
+        name: smb_group
+        state: absent
+     
+    - name: remove samba package
+      yum: name={{ item }} state=absent
+      loop:
+        - samba 
+        - samba-common 
+        - samba-client
+
+    - name: Umount k3s volume if already exists
+      mount:
+        path: /sharing
+        state: unmounted
+        
