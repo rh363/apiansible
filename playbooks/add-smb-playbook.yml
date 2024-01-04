@@ -1,1 +1,20 @@
+---
+- name: install server
+  hosts: local
+  become: true
+  connection: local
+  gather_facts: false
 
+  tasks:
+    - name: add users
+      shell: "createsmbuser {{item.user}} {{item.pass}}"
+      loop: "{{ users }}"
+    
+    - name: restart rpcbind and nfs-server
+      service:
+        name: "{{ item }}" 
+        enabled: yes
+        state: restarted
+      loop:
+        - rpcbind
+        - nfs-server
