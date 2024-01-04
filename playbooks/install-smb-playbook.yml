@@ -43,20 +43,20 @@
         dest: "/etc/samba/smb.conf"
         content: |
         [global]
-	  workgroup = {{ workgroup }}
-          server string = Samba Server 
-          security = user
-          dns proxy = no
-	  log file = /var/log/samba/log.%m
-          max log size = 1000
-          logging = file
-          panic action = /usr/share/samba/panic-action %d
-	  map to guest = bad user
+	workgroup = {{ workgroup }}
+        server string = Samba Server 
+        security = user
+        dns proxy = no
+	log file = /var/log/samba/log.%m
+        max log size = 1000
+        logging = file
+        panic action = /usr/share/samba/panic-action %d
+	map to guest = bad user
         [sharing]
-	  valid users = @smb_group
-	  path = /sharing
-          browsable = yes
-          writable = yes
-          guest ok = no
-          read only = no"
+	valid users = @smb_group
+	path = /sharing
+        browsable = yes
+        writable = yes
+        guest ok = no
+        read only = no"
     
