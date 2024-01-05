@@ -29,7 +29,7 @@
         state: directory
         owner: root
         group: smb_group
-        mode: '0770'
+        mode: 0770
 
     - name: Umount k3s volume if already exists
       mount:
