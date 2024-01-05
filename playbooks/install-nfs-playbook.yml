@@ -23,7 +23,7 @@
     - name: Umount k3s volume if already exists
       mount:
         path: /exports
-        state: unmounted
+        state: mounted
     
     - name: Mount k3s volume
       mount:
