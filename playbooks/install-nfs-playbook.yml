@@ -23,7 +23,7 @@
     - name: Umount k3s volume if already exists
       mount:
         path: /exports
-        state: mounted
+        state: unmounted
     
     - name: Mount k3s volume
       mount:
@@ -31,7 +31,7 @@
         path: /exports
         opts: "rw,sync,hard,intr"
         boot: false
-        state: remounted
+        state: mounted
         fstype: nfs
         
     - name: create exports configuration file if not exist
