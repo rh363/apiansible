@@ -16,14 +16,20 @@
         - samba-common 
         - samba-client
         - nfs-utils
-    
+        
+    - name: add smb_group
+      group:
+        name: smb_group
+        gid: 1005
+        state: present
+        
     - name: Create a mountable directory if it does not exist
       file:
         path: /sharing
         state: directory
         owner: root
-        group: root
-        mode: '0775'
+        group: smb_group
+        mode: '0770'
 
     - name: Umount k3s volume if already exists
       mount:
@@ -38,12 +44,6 @@
         boot: false
         state: mounted
         fstype: nfs
-
-    - name: add smb_group
-      group:
-        name: smb_group
-        gid: 1005
-        state: present
 
     - name: Creating smb configuration file
       copy:
