@@ -2,5 +2,6 @@
 
 useradd "$1"
 usermod -g smb_group "$1"
+groupdel "$1"
 (echo "$2"; sleep 1; echo "$2" ) | smbpasswd -s -a "$1"
 setfacl -R -m "u:$1:rwx" /sharing
