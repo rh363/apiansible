@@ -9,7 +9,7 @@
     - name: upgrade all packages
       yum: update_cache=yes name=* state=latest
 
-    - name: install samba package
+    - name: install samba package and nfs-utils
       yum: name={{ item }} state=latest
       loop:
         - samba 
@@ -24,6 +24,11 @@
         owner: root
         group: root
         mode: '0775'
+
+    - name: Umount k3s volume if already exists
+      mount:
+        path: /sharing
+        state: unmounted
 
     - name: Mount k3s volume
       mount:
