@@ -40,7 +40,7 @@
       mount:
         src: "{{ src }}:/exports"
         path: /sharing
-        opts: "rw,sync,hard,intr"
+        opts: "rw,sync,hard,intr,nolock"
         boot: false
         state: mounted
         fstype: nfs
