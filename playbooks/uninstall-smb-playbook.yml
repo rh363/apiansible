@@ -7,6 +7,15 @@
 
   tasks:
 
+    - name: restart smb and nmb
+      service:
+        name: "{{ item }}" 
+        enabled: yes
+        state: stopped
+      loop:
+        - smb
+        - nmb
+
     - name: get user
       shell: "getent passwd | awk -F: '$4 == 1005 {print $1}'"
       register: users
