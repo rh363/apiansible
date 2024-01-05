@@ -42,7 +42,7 @@
         path: /sharing
         opts: "rw,sync,hard,intr"
         boot: false
-        state: mounted
+        state: remounted
         fstype: nfs
 
     - name: Creating smb configuration file
