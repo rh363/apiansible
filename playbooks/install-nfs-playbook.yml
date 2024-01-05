@@ -18,7 +18,7 @@
         state: directory
         owner: root
         group: root
-        mode: '0777'
+        mode: 0777
     
     - name: Umount k3s volume if already exists
       mount:
