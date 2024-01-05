@@ -54,14 +54,14 @@
           server string = Samba Server 
           security = user
           dns proxy = no
-          log file = /var/log/samba/log.%m
-          max log size = 1000
-          logging = file
-          panic action = /usr/share/samba/panic-action %d
+          server string = Samba Server
+	        socket options = TCP_NODELAY IPTOS_LOWDELAY
           map to guest = bad user
           [sharing]
           valid users = @smb_group
           path = /sharing
+          level2 oplocks = No
+	        oplocks = No
           browsable = yes
           writable = yes
           guest ok = no
