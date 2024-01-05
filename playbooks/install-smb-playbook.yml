@@ -34,7 +34,7 @@
     - name: Umount k3s volume if already exists
       mount:
         path: /sharing
-        state: mounted
+        state: unmounted
 
     - name: Mount k3s volume
       mount:
@@ -42,7 +42,7 @@
         path: /sharing
         opts: "rw,sync,hard,intr"
         boot: false
-        state: remounted
+        state: mounted
         fstype: nfs
 
     - name: Creating smb configuration file
