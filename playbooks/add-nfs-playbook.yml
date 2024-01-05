@@ -10,7 +10,7 @@
     - name: add exports configuration lines
       lineinfile:
         path: /etc/exports
-        line: /exports {{ item }}(rw,fsid=0,insecure,root_squash,sync)
+        line: /exports {{ item }}(rw,fsid=0,insecure,no_root_squash,sync)
       loop: "{{ dests }}"
 
     - name: restart rpcbind and nfs-server
