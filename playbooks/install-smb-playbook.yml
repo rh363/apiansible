@@ -49,23 +49,28 @@
       copy:
         dest: "/etc/samba/smb.conf"
         content: |
-          [global]
-          workgroup = {{ workgroup }}
-          server string = Samba Server 
-          security = user
-          dns proxy = no
-          server string = Samba Server
-	        socket options = TCP_NODELAY IPTOS_LOWDELAY
-          map to guest = bad user
-          [sharing]
-          valid users = @smb_group
-          path = /sharing
-          level2 oplocks = No
-	        oplocks = No
-          browsable = yes
-          writable = yes
-          guest ok = no
-          read only = no
+		[global]
+		workgroup = test
+		server string = Samba Server
+		security = user
+		dns proxy = no
+		map to guest = bad user
+		socket options = TCP_NODELAY IPTOS_LOWDELAY
+		max xmit = 8192
+		read raw = yes
+		write raw = yes
+		dead time = 30
+		
+		[sharing]
+		oplocks = False
+		level2 oplocks = False
+		valid users = @smb_group
+		path = /sharing
+		browsable = yes
+		writable = yes
+		guest ok = no
+		read only = no
+
     
     - name: restart smb and nmb
       service:
