@@ -13,8 +13,8 @@
         enabled: false
         state: stopped
       loop:
-        - rpcbind
         - nfs-server
+        - rpcbind
 
     - name: remove nfs-utils
       yum: 
