@@ -1,5 +1,5 @@
 ---
-- name: install server
+- name: configure server
   hosts: local
   become: true
   connection: local
